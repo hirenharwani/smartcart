@@ -1,6 +1,7 @@
-import { IS_LOADING } from "../actions/index";
+import { Store } from "../..";
+import { IS_LOADING, GET_PRODUCTS, ADD_TO_CART } from "../actions/index";
 
-const scInitProState = {
+const initProState = {
   products: [
     {
       ID: null,
@@ -15,13 +16,13 @@ const scInitProState = {
       },
     },
   ],
-  Status: {
+  status: {
     isSorted: false,
     sortedBy: null,
   },
 };
 
-const scInitNoState = {
+const initNoState = {
   products: {
     Adding: {
       Success: "Product Added Successfully",
@@ -42,32 +43,55 @@ const scInitNoState = {
   },
 };
 
-const scAppRealTimeState = {
+const initRealTimeState = {
   isLoading: true,
-  noOfProductsAddedToCart: null,
+  cart: {
+    products: [],
+    noOfAddToCart: null,
+  },
 };
 
-const initialAppState = {
-  sc_products: scInitProState,
-  sc_notifications: scInitNoState,
-  sc_status: scAppRealTimeState,
+const initAppState = {
+  sc_products: initProState,
+  sc_notifications: initNoState,
+  sc_status: initRealTimeState,
 };
 
-const realTimeReducer = (state = scAppRealTimeState, action) => {
+const proReducer = (state = initProState, action) => {
   switch (action.type) {
-    case IS_LOADING:
+    case GET_PRODUCTS:
       return {
-        isLoading: false,
-        noOfProductsAddedToCart: 10,
+        products: action.data,
+        status: {
+          isSorted: false,
+          sortedBy: null,
+        },
       };
     default:
       return state;
   }
 };
 
-const rootReducer = (state = initialAppState, action) => {
+const rTReducer = (state = initRealTimeState, action) => {
+  switch (action.type) {
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          products: [...state.cart.products, action.id],
+        },
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = (state = initAppState, action) => {
+  console.log(initAppState);
   return {
-    realTimeReducer: realTimeReducer(scAppRealTimeState, action),
+    proReducer: proReducer(state.sc_products, action),
+    rTReducer: rTReducer(state.sc_status, action),
   };
 };
 

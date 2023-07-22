@@ -3,8 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./app/index";
 import { legacy_createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./app/reducers/index";
-import { Provider } from "react-redux";
-import all from "./app/components/index";
 
 const thunk = function ({ dispatch, getState }) {
   return function (next) {

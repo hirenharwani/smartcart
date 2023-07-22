@@ -1,7 +1,4 @@
-const apiRoute = "https://jsonplaceholder.typicode.com";
+const apiRoute = "https://my-json-server.typicode.com/hirenharwani/smartcart";
 export const apiRoutes = {
-  listToDos: () => `${apiRoute}/posts`,
-  addToDo: () => `${apiRoute}/posts`,
-  updateToDo: (toDoID) => `${apiRoute}/posts/${toDoID}`,
-  deleteToDo: (toDoID) => `${apiRoute}/posts/${toDoID}`,
+  listProducts: () => `${apiRoute}/products?_page=1&_limit=10`,
 };

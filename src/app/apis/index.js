@@ -29,7 +29,6 @@ const customFetch = async (url, { body, ...customConfig }) => {
       };
     }
   } catch (error) {
-    console.log(error);
     return {
       message: error.message,
       success: false,
@@ -37,25 +36,8 @@ const customFetch = async (url, { body, ...customConfig }) => {
   }
 };
 
-export const getToDos = () => {
-  return customFetch(apiRoutes.listToDos(), {
+export const getProducts = () => {
+  return customFetch(apiRoutes.listProducts(), {
     method: "GET",
-  });
-};
-
-export const addToDo = (body) => {
-  return customFetch(apiRoutes.addToDo(), { method: "POST", body: body });
-};
-
-export const updateToDo = (body, toDoId) => {
-  return customFetch(apiRoutes.updateToDo(toDoId), {
-    method: "PUT",
-    body: body,
-  });
-};
-
-export const deleteToDo = (toDoId) => {
-  return customFetch(apiRoutes.deleteToDo(toDoId), {
-    method: "DELETE",
   });
 };
