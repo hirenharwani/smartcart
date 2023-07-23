@@ -18,9 +18,10 @@ const thunk = function ({ dispatch, getState }) {
 
 const Store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App Store={Store} />
   </React.StrictMode>
 );
 

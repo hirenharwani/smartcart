@@ -34,7 +34,6 @@ class Products extends React.Component {
       addToCart(id),
       this.setState((prevState) => ({}))
     );
-    console.log("State", Store.getState());
   };
 
   handleDelete = (id) => {};

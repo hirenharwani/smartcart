@@ -7,9 +7,7 @@ class Product extends React.Component {
     super();
     this.state = {};
   }
-
   componentDidMount() {}
-
   render() {
     const product = this.props.product;
     const handleDelete = this.props.handleDelete;

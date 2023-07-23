@@ -1,21 +1,6 @@
-import { Store } from "../..";
 import { IS_LOADING, GET_PRODUCTS, ADD_TO_CART } from "../actions/index";
-
 const initProState = {
-  products: [
-    {
-      ID: null,
-      slug: "",
-      Title: "",
-      Thumbnails: "",
-      Price: "",
-      Description: "",
-      status: {
-        isEditing: false,
-        AddedToCart: false,
-      },
-    },
-  ],
+  products: [],
   status: {
     isSorted: false,
     sortedBy: null,
@@ -45,27 +30,22 @@ const initNoState = {
 
 const initRealTimeState = {
   isLoading: true,
-  cart: {
-    products: [],
-    noOfAddToCart: null,
-  },
+  proAddedToCart: [],
+  noOfAddToCart: null,
 };
 
 const initAppState = {
-  sc_products: initProState,
-  sc_notifications: initNoState,
-  sc_status: initRealTimeState,
+  products: initProState,
+  notifications: initNoState,
+  status: initRealTimeState,
 };
 
 const proReducer = (state = initProState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
+        ...state,
         products: action.data,
-        status: {
-          isSorted: false,
-          sortedBy: null,
-        },
       };
     default:
       return state;
@@ -77,10 +57,7 @@ const rTReducer = (state = initRealTimeState, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: {
-          ...state.cart,
-          products: [...state.cart.products, action.id],
-        },
+        proAddedToCart: [action.id, ...state.proAddedToCart],
       };
     default:
       return state;
@@ -88,10 +65,9 @@ const rTReducer = (state = initRealTimeState, action) => {
 };
 
 const rootReducer = (state = initAppState, action) => {
-  console.log(initAppState);
   return {
-    proReducer: proReducer(state.sc_products, action),
-    rTReducer: rTReducer(state.sc_status, action),
+    proReducer: proReducer(state.proReducer, action),
+    rTReducer: rTReducer(state.rTReducer, action),
   };
 };
 
