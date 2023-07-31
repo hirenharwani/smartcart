@@ -1,6 +1,6 @@
 import React from "react";
 
-class Cart extends React.Component {
+class ViewProduct extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -9,8 +9,8 @@ class Cart extends React.Component {
   componentDidMount() {}
 
   render() {
-    return <>cart component</>;
+    return <>Single Product View</>;
   }
 }
 
-export default Cart;
+export default ViewProduct;

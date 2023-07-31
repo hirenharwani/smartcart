@@ -41,3 +41,21 @@ export const getProducts = () => {
     method: "GET",
   });
 };
+
+export const addProduct = (product) => {
+  return customFetch(apiRoutes.addProduct(product), {
+    method: "POST",
+  });
+};
+
+export const deleteProduct = (id) => {
+  return customFetch(apiRoutes.deleteProduct(id), {
+    method: "DELETE",
+  });
+};
+
+export const updateProduct = (product) => {
+  return customFetch(apiRoutes.updateProduct(product), {
+    method: "PUT",
+  });
+};

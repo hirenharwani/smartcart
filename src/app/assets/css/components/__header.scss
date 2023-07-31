@@ -1,0 +1,40 @@
+header {
+    .inner-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .navbar {
+            width: 50%;
+            ul {
+                display: flex;
+                padding-left: 0px;
+                li {
+                    margin-right: 15px;
+                    list-style: none;
+                    a {
+                        color: #59873E;
+                        padding: 15px 25px;
+                        border: 1px solid #59873E;
+                        text-decoration: none;
+                        transition: 0.3s all ease-in-out;
+                    }
+                    a:hover {
+                        color: #ffff;
+                        background-color: #59873E;
+                    }
+                }
+                li:last-child {
+                    margin-right: 0px;
+                }
+            }
+        }
+        .cart {
+            position: relative;
+            .count {
+                position: absolute;
+                top: -5px;
+                right: -15px;
+            }
+        }
+    }
+}

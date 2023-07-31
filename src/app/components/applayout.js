@@ -1,7 +1,8 @@
 import React from "react";
-import NavBar from "./navbar";
+import Header from "./header";
 import { Outlet } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class AppLayout extends React.Component {
   constructor() {
     super();
@@ -13,8 +14,9 @@ class AppLayout extends React.Component {
   render() {
     return (
       <>
-        <NavBar />
+        <Header />
         <Outlet />
+        <ToastContainer />
       </>
     );
   }

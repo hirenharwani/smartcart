@@ -1,0 +1,41 @@
+.products-listing {
+    padding: 20px 0px;
+    .fillter-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        .sorting {
+            display: flex;
+            align-items: center;
+            span {
+                margin-right: 10px;
+            }
+            img {
+                cursor: pointer;
+            }
+        }
+    }
+    .listings {
+        padding: 40px 0px 20px 0px;
+        .single-wrapper {
+            display: flex;
+            margin-bottom: 15px;
+            position: relative;
+            .thumbnail {
+                margin-right: 20px;
+                border-radius: 12px;
+                img {
+                    border-radius: 12px;
+                }
+            }
+            .actions {
+                position: absolute;
+                top: 0;
+                right: 0;
+                img {
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

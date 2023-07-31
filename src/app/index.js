@@ -1,12 +1,14 @@
 import React from "react";
+import index from "./assets/css/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  Products,
-  Product,
+  Home,
+  ViewProduct,
   Cart,
   NothingFound,
-  AppLayout,
-} from "./components/index";
+  AddProduct,
+} from "./views/index";
+import { AppLayout } from "./components";
 
 class App extends React.Component {
   constructor() {
@@ -20,12 +22,17 @@ class App extends React.Component {
       children: [
         {
           path: "/",
-          element: <Products />,
+          element: <Home />,
+          exact: true,
+        },
+        {
+          path: "/add",
+          element: <AddProduct />,
           exact: true,
         },
         {
           path: "/product",
-          element: <Product />,
+          element: <ViewProduct />,
           exact: true,
         },
         {

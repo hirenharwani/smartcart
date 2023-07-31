@@ -9,7 +9,7 @@ class NothingFound extends React.Component {
   componentDidMount() {}
 
   render() {
-    return <>404</>;
+    return <>cart component</>;
   }
 }
 

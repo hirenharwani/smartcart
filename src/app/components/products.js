@@ -1,26 +1,38 @@
 import React from "react";
-import { getProducts } from "../apis";
+import { getProducts, deleteProduct, updateProduct } from "../apis";
 import { Store } from "../../index";
-import { setProducts, addToCart } from "../actions";
+import {
+  setProducts,
+  addToCart,
+  actionDeleteProduct,
+  actionUpdateProduct,
+} from "../actions";
 import Product from "./product";
-import Pagination from "./pagination";
+import Loader from "./loader";
+import clear from "../assets/media/x.svg";
+import { toast } from "react-toastify";
 
 class Products extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isLoading: true,
+      isSorting: false,
+    };
   }
 
   componentDidMount() {
     const fetchProducts = async () => {
       const response = await getProducts();
       const { data, success } = response;
+      const assending = data?.sort((a, b) => a.price - b.price);
       if (success) {
         Store.dispatch(
-          setProducts(data),
+          setProducts(assending),
           this.setState(() => ({
             products: Store.getState().proReducer.products,
             status: Store.getState().proReducer.status,
+            isLoading: false,
           }))
         );
       } else {
@@ -29,50 +41,133 @@ class Products extends React.Component {
     fetchProducts();
   }
 
-  handleAddTocart = (id) => {
-    Store.dispatch(
-      addToCart(id),
-      this.setState((prevState) => ({}))
-    );
+  handleAddTocart = (product) => {
+    Store.dispatch(addToCart(product), this.showAddToCartNotification(product));
   };
 
-  handleDelete = (id) => {};
-  handleEdit = (product) => {};
-  handleSort = (event) => {};
+  handleDelete = (id) => {
+    const deletePro = async () => {
+      const response = await deleteProduct(id);
+      const { data, success } = response;
+      if (success) {
+        Store.dispatch(
+          actionDeleteProduct(id),
+          this.setState(
+            () => ({
+              products: Store.getState().proReducer.products,
+              status: Store.getState().proReducer.status,
+            }),
+            this.showDeleteSuccessNotification()
+          )
+        );
+      } else {
+        this.showDeleteErrorNotification();
+      }
+    };
+    deletePro(id);
+  };
+
+  showAddToCartNotification = (product) => {
+    toast("Product has been added To cart");
+  };
+
+  showDeleteSuccessNotification = () => {
+    toast("Product deleted successfully");
+  };
+
+  showDeleteErrorNotification = () => {
+    toast("There was unexpected error while trying to delete product");
+  };
+
+  handleUpdate = (product) => {
+    const editPro = async () => {
+      const response = await updateProduct(product);
+      const { data, success } = response;
+      if (success) {
+        Store.dispatch(
+          actionUpdateProduct(product),
+          this.setState(() => ({
+            products: Store.getState().proReducer.products,
+            status: Store.getState().proReducer.status,
+          }))
+        );
+      }
+    };
+    editPro(product);
+    return;
+  };
+
+  handleSort = (event) => {
+    const sortAs = event.target.value;
+    const products = Store.getState().proReducer.products;
+    if (sortAs == "hightolow") {
+      const descending = products.sort((a, b) => b.price - a.price);
+      this.setState(() => ({
+        ...this.state,
+        products: descending,
+        isSorting: true,
+      }));
+    } else {
+      const assending = products.sort((a, b) => a.price - b.price);
+      this.setState(() => ({
+        ...this.state,
+        products: assending,
+        isSorting: false,
+      }));
+    }
+  };
 
   render() {
-    const products = this.state.products;
+    const state = this.state;
+    const products = state.products;
+    const { isLoading, isSorting } = state;
+    const xyz = "selected";
     return (
       <>
-        <table>
-          <tbody>
-            <tr>
-              <td colSpan={2}></td>
-              <td>
-                <div className="sorting">
-                  <select
-                    name="sortby"
-                    id="sortby"
-                    onChange={(event) => this.handleSort(event)}
-                  >
-                    <option value="title">Title</option>
-                    <option value="price">Price</option>
-                  </select>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <section className="products-listing">
+              <div className="container inner-wrapper">
+                <div className="fillter-wrapper">
+                  <div className="sorting">
+                    {isSorting ? (
+                      <img
+                        src={clear}
+                        width="30px"
+                        height="30px"
+                        onClick={this.handleSort}
+                      />
+                    ) : (
+                      <span> Sort By </span>
+                    )}
+                    <select
+                      name="sortby"
+                      id="sortby"
+                      onChange={(event) => this.handleSort(event)}
+                      value={isSorting ? "hightolow" : "lowtohigh"}
+                    >
+                      <option value="lowtohigh">Low to high</option>
+                      <option value="hightolow">High to low</option>
+                    </select>
+                  </div>
                 </div>
-              </td>
-            </tr>
-            {products?.map((product) => (
-              <Product
-                product={product}
-                key={product.id}
-                handleDelete={this.handleDelete}
-                handleEdit={this.handleEdit}
-                handleAddTocart={this.handleAddTocart}
-              />
-            ))}
-          </tbody>
-        </table>
-        <Pagination />
+                <div className="listings">
+                  {products?.map((product) => (
+                    <Product
+                      product={product}
+                      key={product.id}
+                      handleDelete={this.handleDelete}
+                      handleUpdate={this.handleUpdate}
+                      handleAddTocart={this.handleAddTocart}
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </>
     );
   }

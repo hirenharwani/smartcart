@@ -15,12 +15,39 @@ html {
         outline: none;
         -webkit-font-smoothing: subpixel-antialiased;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
-        overflow: hidden;
         #root {
             height: 100%;
         }
-        div {
-            height: 100%;
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0px 20px;
+            button, input[type="submit"] {
+                color: #59873E;
+                padding: 15px 25px;
+                border: 1px solid #59873E;
+                text-decoration: none;
+                transition: 0.3s all ease-in-out;
+                cursor: pointer;
+                margin: 0 0 1em 0;
+            }
+            button:hover, input[type="submit"]:hover {
+                color: white;
+                background-color: #59873E;
+            }
+            input[type="text"], input[type="text"]:focus-visible, input[type="textarea"], input[type="textarea"]:focus-visible, input[type="number"], input[type="number"]:focus-visible, input[type="file"] {
+                width: 100%;
+                margin-bottom: 10px;
+                border: 2px solid #59873E;
+                padding: 20px;
+                border-radius: 5px;
+                outline: none;
+            }
+            input[type="file"] {
+                border: none;
+                padding: 20px 0px;
+            }
         }
     }
 }

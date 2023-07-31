@@ -1,4 +1,11 @@
-import { IS_LOADING, GET_PRODUCTS, ADD_TO_CART } from "../actions/index";
+import {
+  IS_LOADING,
+  GET_PRODUCTS,
+  ADD_TO_CART,
+  ADD_PRODUCT,
+  DELETE_PRODUCT,
+  UPDATE_PRODUCT,
+} from "../actions/index";
 const initProState = {
   products: [],
   status: {
@@ -47,6 +54,23 @@ const proReducer = (state = initProState, action) => {
         ...state,
         products: action.data,
       };
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        products: [...state.products, action.data],
+      };
+    case DELETE_PRODUCT:
+      const filteredProducts = state.products.filter(
+        (product) => product.id !== action.id
+      );
+      return {
+        ...state,
+        products: filteredProducts,
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+      };
     default:
       return state;
   }
@@ -55,10 +79,16 @@ const proReducer = (state = initProState, action) => {
 const rTReducer = (state = initRealTimeState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return {
-        ...state,
-        proAddedToCart: [action.id, ...state.proAddedToCart],
-      };
+      if (state.proAddedToCart.includes(action.product)) {
+        return {
+          ...state,
+        };
+      } else {
+        return {
+          ...state,
+          proAddedToCart: [action.product, ...state.proAddedToCart],
+        };
+      }
     default:
       return state;
   }
