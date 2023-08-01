@@ -43,7 +43,7 @@ class Product extends React.Component {
         this.successNotification()
       );
     } else {
-      toast("In order to update product. Each field is mandatory!");
+      toast("Each field is mandatory! In order to update product");
     }
   }
 
@@ -87,18 +87,21 @@ class Product extends React.Component {
     const handleDelete = this.props.handleDelete;
     const handleAddTocart = this.props.handleAddTocart;
     const { isEditing, isAddedToCart } = this.state;
+    const { id } = product;
     return (
       <>
         <div className="single-wrapper">
           <div className="thumbnail">
-            <Link to="/product">
+            <Link to={`/product/${id}`}>
               <img src={product.thumbnail} width="300" height="210" />
             </Link>
           </div>
           <div className="mid-wrapper">
             {!isEditing || isAddedToCart ? (
               <>
-                <h3 className="title">{product.title}</h3>
+                <Link to={`/product/${id}`}>
+                  <h3 className="title">{product.title}</h3>
+                </Link>
                 <p className="description">{product.description}</p>
                 <p className="price">{product.price}</p>
                 {isAddedToCart ? (
@@ -134,7 +137,7 @@ class Product extends React.Component {
               </>
             )}
 
-            <div className="actions"> 
+            <div className="actions">
               {!isEditing ? (
                 <img
                   src={editSvg}

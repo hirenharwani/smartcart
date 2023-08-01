@@ -31,7 +31,7 @@ class App extends React.Component {
           exact: true,
         },
         {
-          path: "/product",
+          path: "/product/:id",
           element: <ViewProduct />,
           exact: true,
         },

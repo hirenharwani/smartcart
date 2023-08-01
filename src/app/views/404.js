@@ -9,7 +9,7 @@ class NothingFound extends React.Component {
   componentDidMount() {}
 
   render() {
-    return <>cart component</>;
+    return <>Nothing Found</>;
   }
 }
 

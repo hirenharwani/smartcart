@@ -21,12 +21,14 @@ class Cart extends React.Component {
               {proAddedToCart?.map((product) => (
                 <div className="single-wrapper">
                   <div className="thumbnail">
-                    <Link to="/product">
+                    <Link to={`/product/${product.id}`}>
                       <img src={product.thumbnail} width="300" height="210" />
                     </Link>
                   </div>
                   <div className="mid-wrapper">
-                    <h3 className="title">{product.title}</h3>
+                    <Link to={`/product/${product.id}`}>
+                      <h3 className="title">{product.title}</h3>\
+                    </Link>
                     <p className="description">{product.description}</p>
                     <p className="price">{product.price}</p>
                   </div>

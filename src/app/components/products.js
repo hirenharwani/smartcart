@@ -68,7 +68,13 @@ class Products extends React.Component {
   };
 
   showAddToCartNotification = (product) => {
-    toast("Product has been added To cart");
+    const { isFound } = Store.getState().rTReducer;
+    console.log("state", Store.getState());
+    if (isFound) {
+      toast("Product is already in the cart");
+    } else {
+      toast("Product has been added To cart");
+    }
   };
 
   showDeleteSuccessNotification = () => {
@@ -94,7 +100,6 @@ class Products extends React.Component {
       }
     };
     editPro(product);
-    return;
   };
 
   handleSort = (event) => {

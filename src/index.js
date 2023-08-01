@@ -4,6 +4,8 @@ import App from "./app/index";
 import { legacy_createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./app/reducers/index";
 import { Provider } from "react-redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const thunk = function ({ dispatch, getState }) {
   return function (next) {
@@ -17,7 +19,15 @@ const thunk = function ({ dispatch, getState }) {
   };
 };
 
-const Store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+const Store = legacy_createStore(persistedReducer, applyMiddleware(thunk));
+const persistor = persistStore(Store);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -28,4 +38,4 @@ root.render(
   </React.StrictMode>
 );
 
-export { Store };
+export { Store, persistor };

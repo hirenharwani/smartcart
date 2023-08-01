@@ -79,16 +79,32 @@ const proReducer = (state = initProState, action) => {
 const rTReducer = (state = initRealTimeState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      if (state.proAddedToCart.includes(action.product)) {
+      const isFound = state.proAddedToCart.some((element) => {
+        if (element.id === action.product.id) {
+          return true;
+        }
+        return false;
+      });
+      if (!isFound === false) {
         return {
           ...state,
+          isFound: isFound,
         };
       } else {
         return {
           ...state,
           proAddedToCart: [action.product, ...state.proAddedToCart],
+          isFound: isFound,
         };
       }
+    case DELETE_PRODUCT:
+      const filteredProducts = state.proAddedToCart.filter(
+        (product) => product.id !== action.id
+      );
+      return {
+        ...state,
+        proAddedToCart: filteredProducts,
+      };
     default:
       return state;
   }
