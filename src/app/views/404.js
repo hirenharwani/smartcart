@@ -9,7 +9,13 @@ class NothingFound extends React.Component {
   componentDidMount() {}
 
   render() {
-    return <>Nothing Found</>;
+    return (
+      <>
+        <section className="nothing-found">
+          <div className="container inner-wrapper">Nothing Found</div>
+        </section>
+      </>
+    );
   }
 }
 

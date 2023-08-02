@@ -16,6 +16,8 @@ class App extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {}
+
   appRouter = createBrowserRouter([
     {
       element: <AppLayout />,

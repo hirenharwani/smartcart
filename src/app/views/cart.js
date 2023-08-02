@@ -3,6 +3,7 @@ import { Store } from "../../index";
 import { connect } from "react-redux";
 import { Product } from "../components";
 import { Link } from "react-router-dom";
+import placeholder from "../assets/media/placeholder.jpg";
 class Cart extends React.Component {
   constructor() {
     super();
@@ -22,7 +23,11 @@ class Cart extends React.Component {
                 <div className="single-wrapper">
                   <div className="thumbnail">
                     <Link to={`/product/${product.id}`}>
-                      <img src={product.thumbnail} width="300" height="210" />
+                      {product.thumbnail == "" ? (
+                        <img src={placeholder} width="300" height="210" />
+                      ) : (
+                        <img src={product.thumbnail} width="300" height="210" />
+                      )}
                     </Link>
                   </div>
                   <div className="mid-wrapper">

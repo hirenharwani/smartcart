@@ -4,6 +4,7 @@ import { Store } from "../..";
 import { Link } from "react-router-dom";
 import { addToCart } from "../actions";
 import { toast } from "react-toastify";
+import placeholder from "../assets/media/placeholder.jpg";
 class ViewProduct extends React.Component {
   constructor() {
     super();
@@ -47,7 +48,11 @@ class ViewProduct extends React.Component {
             <div className="listings">
               <div className="single-wrapper">
                 <div className="thumbnail">
-                  <img src={product.thumbnail} width="300" height="210" />
+                  {product.thumbnail === "" ? (
+                    <img src={placeholder} width="300" height="210" />
+                  ) : (
+                    <img src={product.thumbnail} width="300" height="210" />
+                  )}
                 </div>
                 <div className="mid-wrapper">
                   <h3 className="title">{product.title}</h3>

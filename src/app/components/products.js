@@ -11,6 +11,7 @@ import Product from "./product";
 import Loader from "./loader";
 import clear from "../assets/media/x.svg";
 import { toast } from "react-toastify";
+import { connect } from "react-redux";
 
 class Products extends React.Component {
   constructor() {
@@ -22,6 +23,7 @@ class Products extends React.Component {
   }
 
   componentDidMount() {
+    const { products } = Store.getState().proReducer;
     const fetchProducts = async () => {
       const response = await getProducts();
       const { data, success } = response;
@@ -38,7 +40,9 @@ class Products extends React.Component {
       } else {
       }
     };
-    fetchProducts();
+    if (products.length == 0) {
+      fetchProducts();
+    }
   }
 
   handleAddTocart = (product) => {
@@ -69,7 +73,6 @@ class Products extends React.Component {
 
   showAddToCartNotification = (product) => {
     const { isFound } = Store.getState().rTReducer;
-    console.log("state", Store.getState());
     if (isFound) {
       toast("Product is already in the cart");
     } else {
@@ -123,10 +126,7 @@ class Products extends React.Component {
   };
 
   render() {
-    const state = this.state;
-    const products = state.products;
-    const { isLoading, isSorting } = state;
-    const xyz = "selected";
+    const { products, isLoading, isSorting } = Store.getState().proReducer;
     return (
       <>
         {isLoading ? (

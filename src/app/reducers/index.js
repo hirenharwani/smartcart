@@ -85,7 +85,7 @@ const rTReducer = (state = initRealTimeState, action) => {
         }
         return false;
       });
-      if (!isFound === false) {
+      if (isFound === true) {
         return {
           ...state,
           isFound: isFound,

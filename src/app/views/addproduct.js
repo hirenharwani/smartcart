@@ -14,6 +14,7 @@ class AddProduct extends React.Component {
   AddProduct = (event) => {
     event.preventDefault();
     const target = event.target;
+    const id = target.id.value;
     const title = target.title.value;
     const description = target.description.value;
     const price = target.price.value;
@@ -25,6 +26,7 @@ class AddProduct extends React.Component {
 
     const add = async () => {
       const product = {
+        id,
         title,
         description,
         price,
@@ -40,7 +42,8 @@ class AddProduct extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    const { products } = Store.getState().proReducer;
+    const id = products.length + 1;
     return (
       <>
         <section className="add-product">
@@ -66,6 +69,7 @@ class AddProduct extends React.Component {
                 required
               />
               <input type="file" name="thumbnail" />
+              <input type="hidden" name="id" value={id} />
               <input type="submit" value="Submit" required />
             </form>
           </div>

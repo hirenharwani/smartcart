@@ -4,6 +4,7 @@ import editSvg from "../assets/media/scEdit.svg";
 import deleteSvg from "../assets/media/scDelete.svg";
 import saveSvg from "../assets/media/save.png";
 import { toast } from "react-toastify";
+import placeholder from "../assets/media/placeholder.jpg";
 
 class Product extends React.Component {
   constructor() {
@@ -93,10 +94,14 @@ class Product extends React.Component {
         <div className="single-wrapper">
           <div className="thumbnail">
             <Link to={`/product/${id}`}>
-              <img src={product.thumbnail} width="300" height="210" />
+              {product.thumbnail == "" ? (
+                <img src={placeholder} width="300" height="210" />
+              ) : (
+                <img src={product.thumbnail} width="300" height="210" />
+              )}
             </Link>
           </div>
-          <div className="mid-wrapper">
+          <div className={`mid-wrapper ${isEditing}`}>
             {!isEditing || isAddedToCart ? (
               <>
                 <Link to={`/product/${id}`}>

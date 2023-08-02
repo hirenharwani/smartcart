@@ -3,20 +3,46 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        @media screen and (max-width: 767px) {
+            flex-direction: column;
+        }
+        .logo-wrapper {
+            img {
+                @media screen and (max-width: 767px) {
+                    width: 100px;
+                    height: 70px;
+                }
+            }
+        }
         .navbar {
             width: 50%;
+            @media screen and (max-width: 767px) {
+                width: 100%;
+            }
             ul {
                 display: flex;
                 padding-left: 0px;
+                @media screen and (max-width: 767px) {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
                 li {
                     margin-right: 15px;
                     list-style: none;
+                    @media screen and (max-width: 767px) {
+                        margin-right: 7.5x;
+                    }
                     a {
                         color: #59873E;
                         padding: 15px 25px;
                         border: 1px solid #59873E;
                         text-decoration: none;
                         transition: 0.3s all ease-in-out;
+                        @media screen and (max-width: 767px) {
+                            margin-bottom: 10px;
+                        }
+
                     }
                     a:hover {
                         color: #ffff;

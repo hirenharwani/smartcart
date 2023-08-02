@@ -17,20 +17,44 @@
     .listings {
         padding: 40px 0px 20px 0px;
         .single-wrapper {
+            @media screen and (max-width: 567px) {
+                flex-direction: column;
+            }
             display: flex;
             margin-bottom: 15px;
             position: relative;
             .thumbnail {
                 margin-right: 20px;
                 border-radius: 12px;
+                a {
+                    @media screen and (max-width: 767px) {
+                        width: 100%;                        
+                    }
+                    img {
+                        border-radius: 12px;
+                        @media screen and (max-width: 567px) {
+                            width: 100%;                        
+                        }
+                    }
+                }
+                @media screen and (max-width: 567px) {
+                    margin-right: 0px;
+                    width: 100%;
+                }
                 img {
-                    border-radius: 12px;
+                    @media screen and (max-width: 567px) {
+                        width: 100%;
+                    }
                 }
             }
             .actions {
+                @media screen and (max-width: 767px) {
+                    position: static;
+                }
                 position: absolute;
                 top: 0;
                 right: 0;
+                margin: 10px 0px;
                 img {
                     margin-right: 10px;
                     cursor: pointer;

@@ -19,10 +19,12 @@ html {
             height: 100%;
         }
         .container {
-            width: 100%;
             max-width: 1140px;
             margin: 0 auto;
             padding: 0px 20px;
+            a {
+                display: inline-block;
+            }
             button, input[type="submit"] {
                 color: #59873E;
                 padding: 15px 25px;
@@ -38,11 +40,15 @@ html {
             }
             input[type="text"], input[type="text"]:focus-visible, input[type="textarea"], input[type="textarea"]:focus-visible, input[type="number"], input[type="number"]:focus-visible, input[type="file"] {
                 width: 100%;
+                max-width: -webkit-fill-available;
                 margin-bottom: 10px;
                 border: 2px solid #59873E;
                 padding: 20px;
                 border-radius: 5px;
                 outline: none;
+                @media screen and (max-width: 767px) {
+                    display: inline-block;
+                }
             }
             input[type="file"] {
                 border: none;
