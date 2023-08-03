@@ -126,7 +126,8 @@ class Products extends React.Component {
   };
 
   render() {
-    const { products, isLoading, isSorting } = Store.getState().proReducer;
+    const { products, isLoading } = Store.getState().proReducer;
+    const { isSorting } = this.state;
     return (
       <>
         {isLoading ? (
