@@ -239,6 +239,14 @@
       "thumbnail": "https://i.dummyjson.com/data/products/30/thumbnail.jpg",
       "price": 30,
       "description": "Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality"
+    },
+    {
+      "id": 31,
+      "slug": "",
+      "title": "",
+      "thumbnail": "",
+      "price": null,
+      "description": ""
     }
   ]
 }

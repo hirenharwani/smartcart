@@ -18,38 +18,41 @@ class App extends React.Component {
 
   componentDidMount() {}
 
-  appRouter = createBrowserRouter([
-    {
-      element: <AppLayout />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-          exact: true,
-        },
-        {
-          path: "/add",
-          element: <AddProduct />,
-          exact: true,
-        },
-        {
-          path: "/product/:id",
-          element: <ViewProduct />,
-          exact: true,
-        },
-        {
-          path: "/cart",
-          element: <Cart />,
-          exact: true,
-        },
-        {
-          path: "*",
-          element: <NothingFound />,
-          exact: true,
-        },
-      ],
-    },
-  ]);
+  appRouter = createBrowserRouter(
+    [
+      {
+        element: <AppLayout />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+            exact: true,
+          },
+          {
+            path: "/add",
+            element: <AddProduct />,
+            exact: true,
+          },
+          {
+            path: "/product/:id",
+            element: <ViewProduct />,
+            exact: true,
+          },
+          {
+            path: "/cart",
+            element: <Cart />,
+            exact: true,
+          },
+          {
+            path: "*",
+            element: <NothingFound />,
+            exact: true,
+          },
+        ],
+      },
+    ],
+    { basename: "/smartcart" }
+  );
 
   render() {
     return (
